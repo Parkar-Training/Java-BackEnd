@@ -22,24 +22,16 @@ public class User {
 	
 	@Column(nullable = false , unique = true , length = 50)
 	@Email
-	@NotNull(message = "It should not be null")
-	@NotBlank
 	private String email;
 	
 	@Column(nullable = false , unique = true , length = 10)
-	@NotBlank
 	@Size(min = 10 , max = 10)
-	@NotNull(message = "It should not be null")
 	private String mob;
 	
 	@Column(nullable = false , length = 50)
-	@NotNull(message = "It should not be null")
-	@NotBlank
 	private String name;
 	
-	@Column(nullable = false , length = 64)
-	@NotNull(message = "It should not be null")
-	@NotBlank
+	@Column(nullable = false , length = 64)	
 	private String password;
 	
 	@Column(nullable = false,length = 100)

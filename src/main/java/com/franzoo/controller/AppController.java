@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.Validation;
+//import javax.validation.Validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -179,6 +179,7 @@ public class AppController {
 				 {
 				 hashtext = "0" + hashtext;
 				 }
+				 validation.changePasswordValidation(user);
 				if(fetchUser.getPassword().equals(hashtext)) {
 					String newPassword= user.getNewPassword();
 					 MessageDigest mdNew = null;
@@ -225,6 +226,7 @@ public class AppController {
 		@PostMapping("/sendMessage")
 		public ResponseEntity<Object> sendMessage(@RequestBody ChatEntity chat) {
 		 Date date=  Calendar.getInstance().getTime();
+		 validation.chatValidation(chat);
 		 if(chat.getFromId() != chat.getToId()) {
 			 User fetchToId = repo.fetchUserById(chat.getToId());
 			 if(fetchToId!=null) {
@@ -238,11 +240,11 @@ public class AppController {
 					 CustomResponseForSendMessage response = new CustomResponseForSendMessage("Message Send Successfully",chat.getToId(),chat.getFromId(),date.toString(),chat.getMessage());
 					 return new ResponseEntity<Object>(response, HttpStatus.OK);
 				 }else {
-					 CustomResponse response = new CustomResponse("Receiver not found");
+					 CustomResponse response = new CustomResponse("Sender not found");
 					 return new ResponseEntity<Object>(response, HttpStatus.OK);
 				 }
 			 }else {
-				 CustomResponse response = new CustomResponse("Sender not found");
+				 CustomResponse response = new CustomResponse("Receiver not found");
 				 return new ResponseEntity<Object>(response, HttpStatus.OK);
 			 }
 		 }else {
@@ -422,6 +424,7 @@ public class AppController {
 			 				//if(fetchUser.getEmail().equals(newPassword.getEmail())) {
 			 			validation.forgetPasswordOtpValidation(newPassword,fetchUser);
 			 				//	if(fetchUser.getOTP().equals(newPassword.getOtp())) {
+			 			
 			 							try 
 			 							{
 			 								md = MessageDigest.getInstance("MD5");

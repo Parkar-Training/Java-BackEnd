@@ -2,6 +2,8 @@ package com.franzoo.service;
 
 import org.springframework.stereotype.Service;
 
+import com.franzoo.customresponse.CustomRequestForChangePassword;
+import com.franzoo.entities.ChatEntity;
 import com.franzoo.entities.User;
 import com.franzoo.exception.InvalidRequestException;
 import com.franzoo.requestdto.NewPasswordDTO;
@@ -25,8 +27,18 @@ public class Validations {
 			throw new InvalidRequestException("Invalid Mobile Number");
 		}
 		
+		String password = "";
+		if (user.getPassword().matches(password)) {
+			throw new InvalidRequestException("Password is Blank");
+		}
 		
+		String name = "";
+		if (user.getName().matches(name)) {
+			throw new InvalidRequestException("Name is Blank");
+		}		
 	}
+	
+	
 	public void forgetPasswordOtpValidation(NewPasswordDTO newPassword,User user) {
 		
 		if(!newPassword.getEmail().equals(user.getEmail())) {
@@ -36,6 +48,28 @@ public class Validations {
 			throw new InvalidRequestException("Invalid OTP");
 		}
 	
+	}
+	
+	public void changePasswordValidation(CustomRequestForChangePassword user) {
+		String blankNewPassword = "";
+		if (user.getNewPassword().equals(blankNewPassword)) {
+			throw new InvalidRequestException("New Password cannot be Blank");
+		}
+		
+		if (user.getOldPassword().equals(blankNewPassword)) {
+			throw new InvalidRequestException("Old Password cannot be Blank");
+		}
+		
+		if (user.getEmail().equals(blankNewPassword)) {
+			throw new InvalidRequestException("Please Enter valid Email");
+		}
+	}
+	
+	public void chatValidation(ChatEntity chat) {
+		String blank = "";
+		if (chat.getMessage().equals(blank)) {
+			throw new InvalidRequestException("Message not entered");
+		}
 	}
 	
 	
