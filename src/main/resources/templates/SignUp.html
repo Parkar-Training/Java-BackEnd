@@ -148,6 +148,7 @@
 		console.log(params);
     $.ajax({method:"POST" , url: urlString, data:JSON.stringify(params) , contentType:"application/json" ,timeout:6000, dataType : 'json', mode:"no-cors",success:
     function (data) {// success callback function
+    console.log(data);
             	window.location = "/SignUp_OTP";
 			
     },

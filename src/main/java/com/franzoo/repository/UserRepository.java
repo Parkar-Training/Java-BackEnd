@@ -29,10 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("Select u from User u WHERE is_Private = '0'")
 	List<User> findByPrivate();
 	
-	@Transactional
-	@Modifying
-	@Query("Update User u set u.password=?1 WHERE u.email=?2")
-	void chnagePassword(String password,String email);
 
 	@Query("SELECT u FROM User u WHERE u.name like %?1% AND u.is_Private <> '1'")
 	List<User> searchName(String name);
@@ -47,6 +43,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 	@Query("SELECT u FROM User u WHERE u.uid=?1")
 	User fetchUserById(long id);
+
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE User u SET u.is_Private=?1 WHERE u.email=?2")
+	void updateByPrivateStatus(String isprivate,String email);
 
 	
 }

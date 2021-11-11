@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.franzoo.customresponse.CustomRequestForChangePassword;
 import com.franzoo.customresponse.CustomResponse;
 import com.franzoo.customresponse.CustomResponseForFetchUser;
+import com.franzoo.customresponse.CustomResponseForPrivateStatus;
 import com.franzoo.customresponse.CustomResponseForSendMessage;
 import com.franzoo.entities.Advertise;
 import com.franzoo.entities.ChatEntity;
@@ -43,7 +44,7 @@ import com.franzoo.responsedto.CustomResponseForException;
 import com.franzoo.service.MailService;
 import com.franzoo.service.Validations;
 
-@RestController
+@Controller
 public class AppController {
 	@Autowired
 	UserRepository repo;
@@ -436,6 +437,34 @@ public class AppController {
 			 		
 			 		return new ResponseEntity<Object>("password change failed",HttpStatus.OK);
 		 }
-}
+		 
+//********************************************UPDATE PRIVATE STATUS************************************//
+//		 @PostMapping("/updatePrivateStatus")
+//		 public ResponseEntity<Object> updatePrivateStatus(@RequestBody User user)
+//		 {
+//			 User fetchUser = repo.fetchUserbyEmail(user.getEmail());
+//			 try {
+//			 if(fetchUser != null) {
+//				 if(fetchUser.getEmail().equals(user.getEmail())) {
+//					 if(!fetchUser.getIs_Private().equals(user.getIs_Private())) {
+//						 validation.privateStatusValidation();
+//						 String s = user.getIs_Private();
+//						 user.setIs_Private(s);
+//						 repo.updateByPrivateStatus(s,user.getEmail());
+//						 CustomResponseForPrivateStatus response = new CustomResponseForPrivateStatus(user.getIs_Private(),user.getEmail());
+//						 return new ResponseEntity<Object>(response, HttpStatus.OK);
+//				 }
+//			 }
+//			 }
+//			 }
+//			 catch(Exception ex) {
+//				 return new ResponseEntity<Object>(ex.getMessage(),HttpStatus.NOT_FOUND);
+//			 }
+//			 return new ResponseEntity<Object>("Status Not Updated",HttpStatus.OK);
+//		 }
+//			
+		 
+
 		 
 		
+}

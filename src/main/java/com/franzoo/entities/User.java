@@ -38,7 +38,7 @@ public class User {
 	private String created_at="";
 	
 	@Column(nullable = false)
-	private String is_Private = "0";
+	private Boolean is_Private = false;
 	
 	@Column(nullable = true , length = 4)
 	private String OTP;
@@ -46,10 +46,10 @@ public class User {
 	@Column(nullable = false)
 	private String twoFA = "0";
 	
-	public String getIs_Private() {
+	public Boolean getIs_Private() {
 		return is_Private;
 	}
-	public void setIs_Private(String is_Private) {
+	public void setIs_Private(Boolean is_Private) {
 		this.is_Private = is_Private;
 	}
 	public long getUid() {
@@ -106,7 +106,7 @@ public class User {
 				+ ", created_at=" + created_at + ", is_Private=" + is_Private + ", OTP=" + OTP + ", twoFA=" + twoFA
 				+ "]";
 	}
-	public User(long uid, @Email String email, @Size(min = 10, max = 10) String mob, String name,String created_at, String is_Private,String twoFA) {
+	public User(long uid, @Email String email, @Size(min = 10, max = 10) String mob, String name,String created_at, Boolean is_Private,String twoFA) {
 		super();
 		this.uid = uid;
 		this.email = email;

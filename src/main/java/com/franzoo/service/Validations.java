@@ -71,8 +71,22 @@ public class Validations {
 			throw new InvalidRequestException("Message not entered");
 		}
 	}
+
+
+	public void privateStatusValidation(User user) {
+	//	String privateStat =
+//		if(user.getIs_Private()!= "0") {
+//		else if(user.getIs_Private()= "1") {
+//			
+//			throw new InvalidRequestException("")
+//		}
+//		}
+//		
+			
+		}
+	}
 	
 	
 	
 
-}
+
