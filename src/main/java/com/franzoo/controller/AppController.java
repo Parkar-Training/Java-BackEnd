@@ -113,7 +113,7 @@ public class AppController {
 				System.out.print("harsh_2");
 				//return "register saved successfully";
 				//return "/SignUp_OTP";
-				User response = new User(user.getUid(), user.getEmail(), user.getMob(), user.getName(),user.getCreated_at(), user.getIs_Private());
+				User response = new User(user.getUid(), user.getEmail(), user.getMob(), user.getName(),user.getCreated_at(), user.getIs_Private(), user.getTwoFA());
 		// CustomResponseForSendMessage response = new CustomResponseForSendMessage("Message Send Successfully",chat.getToId(),chat.getFromId(),date.toString(),chat.getMessage());
 
 				return new ResponseEntity<Object>(response,HttpStatus.OK);
@@ -349,28 +349,7 @@ public class AppController {
 	}
 	return new ResponseEntity<Object>("Invalid Data",HttpStatus.OK);
 	}	
-	//***************************************reset password***************************************************
-/*	@PostMapping("/forg_new_pass")
-	public ResponseEntity <String> resetPassword(@RequestBody New_Password npass){
-		String newpasswd=npass.getPassword();
-		MessageDigest md;
-		try {
-		md = MessageDigest.getInstance("MD5");
-		byte[] messageDigest = md.digest(newpasswd.getBytes());
-		BigInteger number = new BigInteger(1, messageDigest);
-		String hashtext= number.toString(16);
-		while(hashtext.length()< 32)
-		{
-		hashtext = "0" + hashtext;
-		}
-		System.out.println("Enc is:"+hashtext);
-		npass.setPassword(hashtext);
-		repo.changePassword(npass.getPassword(),npass.getEmail());
-		return new ResponseEntity<>("Password Updated Successfully",HttpStatus.OK);
-		} catch (NoSuchAlgorithmException e) {
-	return new ResponseEntity<>("password change failed",HttpStatus.NOT_FOUND);
-	}
-	}*/
+	
 	//***********************************post table crud operation**********************************************	
 		@GetMapping("/viewpost")
 		public List<Postdata> GetPost(){
@@ -458,3 +437,5 @@ public class AppController {
 			 		return new ResponseEntity<Object>("password change failed",HttpStatus.OK);
 		 }
 }
+		 
+		

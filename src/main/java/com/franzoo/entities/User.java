@@ -40,8 +40,11 @@ public class User {
 	@Column(nullable = false)
 	private String is_Private = "0";
 	
-	@Column(nullable = false , length = 4)
+	@Column(nullable = true , length = 4)
 	private String OTP;
+	
+	@Column(nullable = false)
+	private String twoFA = "0";
 	
 	public String getIs_Private() {
 		return is_Private;
@@ -91,30 +94,34 @@ public class User {
 	public void setOTP(String oTP) {
 		OTP = oTP;
 	}
+	public String getTwoFA() {
+		return twoFA;
+	}
+	public void setTwoFA(String twoFA) {
+		this.twoFA = twoFA;
+	}
 	@Override
 	public String toString() {
 		return "User [uid=" + uid + ", email=" + email + ", mob=" + mob + ", name=" + name + ", password=" + password
-				+ ", created_at=" + created_at + ", is_Private=" + is_Private + ", OTP=" + OTP + "]";
+				+ ", created_at=" + created_at + ", is_Private=" + is_Private + ", OTP=" + OTP + ", twoFA=" + twoFA
+				+ "]";
 	}
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public User(long uid, String email, @Size(min = 10, max = 10) String mob, String name, String created_at, String is_Private) {
+	public User(long uid, @Email String email, @Size(min = 10, max = 10) String mob, String name,String created_at, String is_Private,String twoFA) {
 		super();
 		this.uid = uid;
 		this.email = email;
 		this.mob = mob;
 		this.name = name;
-//		this.password = password;
+		//this.password = password;
 		this.created_at = created_at;
 		this.is_Private = is_Private;
 		//OTP = oTP;
+		this.twoFA = twoFA;
 	}
-	
-	
-	
-	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}	
 }
 
 	
