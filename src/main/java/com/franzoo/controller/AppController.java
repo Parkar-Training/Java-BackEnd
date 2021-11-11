@@ -439,30 +439,30 @@ public class AppController {
 		 }
 		 
 //********************************************UPDATE PRIVATE STATUS************************************//
-//		 @PostMapping("/updatePrivateStatus")
-//		 public ResponseEntity<Object> updatePrivateStatus(@RequestBody User user)
-//		 {
-//			 User fetchUser = repo.fetchUserbyEmail(user.getEmail());
-//			 try {
-//			 if(fetchUser != null) {
-//				 if(fetchUser.getEmail().equals(user.getEmail())) {
-//					 if(!fetchUser.getIs_Private().equals(user.getIs_Private())) {
-//						 validation.privateStatusValidation();
-//						 String s = user.getIs_Private();
-//						 user.setIs_Private(s);
-//						 repo.updateByPrivateStatus(s,user.getEmail());
-//						 CustomResponseForPrivateStatus response = new CustomResponseForPrivateStatus(user.getIs_Private(),user.getEmail());
-//						 return new ResponseEntity<Object>(response, HttpStatus.OK);
-//				 }
-//			 }
-//			 }
-//			 }
-//			 catch(Exception ex) {
-//				 return new ResponseEntity<Object>(ex.getMessage(),HttpStatus.NOT_FOUND);
-//			 }
-//			 return new ResponseEntity<Object>("Status Not Updated",HttpStatus.OK);
-//		 }
-//			
+		 @PostMapping("/updatePrivateStatus")
+		 public ResponseEntity<Object> updatePrivateStatus(@RequestBody User user)
+		 {
+			 User fetchUser = repo.fetchUserbyEmail(user.getEmail());
+			 try {
+			 if(fetchUser != null) {
+				 if(fetchUser.getEmail().equals(user.getEmail())) {
+					 if(fetchUser.getIs_Private()!=user.getIs_Private()) {
+						// validation.privateStatusValidation(user);
+						 int s = user.getIs_Private();
+						 user.setIs_Private(s);
+						 repo.updateByPrivateStatus(s,user.getEmail());
+						 CustomResponseForPrivateStatus response = new CustomResponseForPrivateStatus(user.getIs_Private(),user.getEmail());
+						 return new ResponseEntity<Object>(response, HttpStatus.OK);
+				 }
+			 }
+			 }
+			 }
+			 catch(Exception ex) {
+				 return new ResponseEntity<Object>(ex.getMessage(),HttpStatus.NOT_FOUND);
+			 }
+			 return new ResponseEntity<Object>("Status Not Updated",HttpStatus.OK);
+		 }
+			
 		 
 
 		 
