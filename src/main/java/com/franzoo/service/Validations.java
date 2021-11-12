@@ -73,16 +73,16 @@ public class Validations {
 	}
 
 
-//	public void privateStatusValidation(User user) {
-//	Boolean s= false || true;
-//		if(user.getIs_Private() != s.toString() ) {
-//		
-//			throw new InvalidRequestException("Invalid Data");
-//		
-//		}
-//		
-//			
-//		}
+	public void privateStatusValidation(User user) {
+	
+		if(user.getIs_Private() != true || user.getIs_Private()!= false ) {
+		
+			throw new InvalidRequestException("Please Enter Valid Data");
+		
+		}
+		
+			
+		}
 	}
 	
 	

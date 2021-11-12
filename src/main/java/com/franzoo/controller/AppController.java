@@ -28,6 +28,7 @@ import com.franzoo.customresponse.CustomResponse;
 import com.franzoo.customresponse.CustomResponseForFetchUser;
 import com.franzoo.customresponse.CustomResponseForPrivateStatus;
 import com.franzoo.customresponse.CustomResponseForSendMessage;
+import com.franzoo.customresponse.CustomResponseForTwoFAStatus;
 import com.franzoo.entities.Advertise;
 import com.franzoo.entities.ChatEntity;
 import com.franzoo.entities.Postdata;
@@ -114,7 +115,7 @@ public class AppController {
 				System.out.print("harsh_2");
 				//return "register saved successfully";
 				//return "/SignUp_OTP";
-				User response = new User(user.getUid(), user.getEmail(), user.getMob(), user.getName(),user.getCreated_at(), user.getIs_Private(), user.getTwoFA());
+				User response = new User(user.getUid(), user.getEmail(), user.getMob(), user.getName(),user.getPassword(),user.getCreated_at(),user.getIs_Private(),user.getOTP(),user.getTwoFA());
 		// CustomResponseForSendMessage response = new CustomResponseForSendMessage("Message Send Successfully",chat.getToId(),chat.getFromId(),date.toString(),chat.getMessage());
 
 				return new ResponseEntity<Object>(response,HttpStatus.OK);
@@ -447,13 +448,44 @@ public class AppController {
 			 if(fetchUser != null) {
 				 if(fetchUser.getEmail().equals(user.getEmail())) {
 					 if(fetchUser.getIs_Private()!=user.getIs_Private()) {
-						// validation.privateStatusValidation(user);
-						 int s = user.getIs_Private();
+						//validation.privateStatusValidation(user);
+						 boolean s = user.getIs_Private();
 						 user.setIs_Private(s);
 						 repo.updateByPrivateStatus(s,user.getEmail());
 						 CustomResponseForPrivateStatus response = new CustomResponseForPrivateStatus(user.getIs_Private(),user.getEmail());
 						 return new ResponseEntity<Object>(response, HttpStatus.OK);
 				 }
+//					 else {
+//					 return new ResponseEntity<Object>("Status is already changed",HttpStatus.OK);
+//				 }
+			 }
+			 }
+			 }
+			 catch(Exception ex) {
+				 return new ResponseEntity<Object>(ex.getMessage(),HttpStatus.NOT_FOUND);
+			 }
+			 return new ResponseEntity<Object>("Status Not Updated",HttpStatus.OK);
+		 }
+		 
+//*******************************************UPDATE TWOFA STATUS**************************************//
+		 @PostMapping("/updateTwoFAStatus")
+		 public ResponseEntity<Object> updateTwoFAStatus(@RequestBody User user)
+		 {
+			 User fetchUser = repo.fetchUserbyEmail(user.getEmail());
+			 try {
+			 if(fetchUser != null) {
+				 if(fetchUser.getEmail().equals(user.getEmail())) {
+					 if(fetchUser.getTwoFA()!=user.getTwoFA()) {
+						//validation.privateStatusValidation(user);
+						 boolean s = user.getTwoFA();
+						 user.setTwoFA(s);
+						 repo.updateByTwoFAStatus(s,user.getEmail());
+						 CustomResponseForTwoFAStatus response = new CustomResponseForTwoFAStatus(user.getTwoFA(),user.getEmail());
+						 return new ResponseEntity<Object>(response, HttpStatus.OK);
+				 }
+//					 else {
+//					 return new ResponseEntity<Object>("Status is already changed",HttpStatus.OK);
+//				 }
 			 }
 			 }
 			 }

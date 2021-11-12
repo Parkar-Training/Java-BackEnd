@@ -48,7 +48,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Transactional
 	@Modifying
 	@Query("UPDATE User u SET u.is_Private=?1 WHERE u.email=?2")
-	void updateByPrivateStatus(int isprivate,String email);
+	void updateByPrivateStatus(boolean isprivate,String email);
+	
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE User u SET u.twoFA=?1 WHERE u.email=?2")
+	void updateByTwoFAStatus(boolean twoFA,String email);
 
 	
 }

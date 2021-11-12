@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 
+import org.hibernate.annotations.ColumnDefault;
+
 
 @Entity
 @Table(name = "users")
@@ -38,18 +40,18 @@ public class User {
 	private String created_at="";
 	
 	@Column(nullable = false)
-	private int is_Private = 0;
+	private boolean is_Private = false;
 	
 	@Column(nullable = true , length = 4)
 	private String OTP;
 	
 	@Column(nullable = false)
-	private int twoFA = 0;
+	private boolean twoFA = false;
 	
-	public int getIs_Private() {
+	public boolean getIs_Private() {
 		return is_Private;
 	}
-	public void setIs_Private(int is_Private) {
+	public void setIs_Private(boolean is_Private) {
 		this.is_Private = is_Private;
 	}
 	public long getUid() {
@@ -94,10 +96,10 @@ public class User {
 	public void setOTP(String oTP) {
 		OTP = oTP;
 	}
-	public int getTwoFA() {
+	public boolean getTwoFA() {
 		return twoFA;
 	}
-	public void setTwoFA(int twoFA) {
+	public void setTwoFA(boolean twoFA) {
 		this.twoFA = twoFA;
 	}
 	@Override
@@ -106,16 +108,18 @@ public class User {
 				+ ", created_at=" + created_at + ", is_Private=" + is_Private + ", OTP=" + OTP + ", twoFA=" + twoFA
 				+ "]";
 	}
-	public User(long uid, @Email String email, @Size(min = 10, max = 10) String mob, String name,String created_at, int is_Private,int twoFA) {
+	
+	public User(long uid, String email, String mob, String name, String password, String created_at, boolean is_Private,
+			String oTP, boolean twoFA) {
 		super();
 		this.uid = uid;
 		this.email = email;
 		this.mob = mob;
 		this.name = name;
-		//this.password = password;
+		this.password = password;
 		this.created_at = created_at;
 		this.is_Private = is_Private;
-		//OTP = oTP;
+		OTP = oTP;
 		this.twoFA = twoFA;
 	}
 	public User() {

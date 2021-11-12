@@ -2,21 +2,21 @@ package com.franzoo.customresponse;
 
 public class CustomResponseForPrivateStatus {
 	
-	private int isPrivate;
+	private boolean isPrivate;
 	private String email;
 	public CustomResponseForPrivateStatus() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CustomResponseForPrivateStatus(int isPrivate, String email) {
+	public CustomResponseForPrivateStatus(boolean isPrivate, String email) {
 		super();
 		this.isPrivate = isPrivate;
 		this.email = email;
 	}
-	public int getIsPrivate() {
+	public boolean getIsPrivate() {
 		return isPrivate;
 	}
-	public void setIsPrivate(int isPrivate) {
+	public void setIsPrivate(boolean isPrivate) {
 		this.isPrivate = isPrivate;
 	}
 	public String getEmail() {
