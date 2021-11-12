@@ -69,20 +69,20 @@ public class AppController {
 		
 		
 		@RequestMapping("/")
-		public String getSignUpPage() {
-			return "SignUp";	
+		public String getHomePage() {
+			return "welcome";	
 		}
-		@RequestMapping("/SignUp_OTP")
+		@RequestMapping("/signUpOtp")
 		public String getSignUpOTPPage() {
 			return "SignUp_OTP";	
 		}
 		@RequestMapping("/sign_in")
-		public String getSign_in_Page() {
+		public String getSignInPage() {
 			return "sign_in";	
 		}
-		@RequestMapping("/Homepage")
-		public String getHomePage() {
-			return "HomePage";
+		@RequestMapping("/signUp")
+		public String getSignUpPage() {
+			return "SignUp";
 		}
 //*******************SignUp********************//	
 	@RequestMapping(value = "/process_register", method = RequestMethod.POST )
@@ -158,7 +158,6 @@ public class AppController {
 						,fetchUser.get(i).getEmail(),fetchUser.get(i).getMob());
 				users.add(reponse);
 			}
-			
 			return new ResponseEntity<Object>(users,HttpStatus.OK);
 		}
 //*****************************USER PREFERENCES CHANGE PASSSWORD*****************************//		
